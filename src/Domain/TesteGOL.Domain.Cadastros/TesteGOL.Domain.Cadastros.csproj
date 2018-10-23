@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.0.100" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.UnitOfWork" Version="2.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain.Core\TesteGOL.Domain.Core\TesteGOL.Domain.Core.csproj" />
+    <ProjectReference Include="..\..\Shared\TesteGOL.Infra.Bus\TesteGOL.Infra.Bus.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ValueObjects\" />
+  </ItemGroup>
+</Project>
