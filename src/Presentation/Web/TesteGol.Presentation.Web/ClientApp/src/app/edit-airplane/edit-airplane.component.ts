@@ -38,17 +38,11 @@ export class EditAirplaneComponent implements OnInit {
 
         var d = new Date(data.dataRegistro.toString()).toISOString();
 
-        
-        //var aData =  d.getDay().toString() + "/" + d.getMonth().toString() + "/" + d.getFullYear().toString();
-        //alert(moment(data.dataRegistro).format('DD/MM/YYYY'));
         this.editForm.controls.CodigoAviao.setValue(data.codigoAviao);
         this.editForm.controls.DataRegistro.setValue(moment(data.dataRegistro).format('DD/MM/YYYY'));
         this.editForm.controls.Id.setValue(data.id);
         this.editForm.controls.Modelo.setValue(data.modelo);
         this.editForm.controls.Passageiros.setValue(data.passageiros);
-
-        /*this.editForm.setValue([{ key: "Id", value: data.id },
-          { key: "CodigoAviao", value: data.codigoAviao }]);*/
       });
   }
 
