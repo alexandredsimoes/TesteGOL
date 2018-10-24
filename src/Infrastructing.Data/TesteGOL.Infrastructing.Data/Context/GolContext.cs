@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using TesteGOL.Domain.Cadastros.Entidades;
 using System;
+using System.IO;
 
 namespace TesteGOL.Infrastructing.Data.Context
 {
@@ -40,16 +41,14 @@ namespace TesteGOL.Infrastructing.Data.Context
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {            
-            IConfiguration config = ConfigurationServices.GetConfiguration();
+        {
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-            string client = config["Database:Client"]?.ToLowerInvariant();
-            
-            if (client == "sqlserver")
-            {
-                optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnectionSql"))
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnectionSql"))
                     .EnableSensitiveDataLogging(true);
-            }
         }             
     }
 }

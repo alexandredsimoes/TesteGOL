@@ -17,6 +17,7 @@ namespace TesteGOL.Application.Cadastros.ViewModels
 
     public partial class AirplaneViewModel
     {
+        public Guid? Id { get; set; }
         public string CodigoAviao { get; set; }
         public string Modelo { get; set; }
         public int Passageiros { get; set; }
@@ -24,7 +25,7 @@ namespace TesteGOL.Application.Cadastros.ViewModels
 
         internal Airplane ToModel()
         {
-            return new Airplane(CodigoAviao, Modelo, Passageiros, DataRegistro);
+            return new Airplane(Id ?? Guid.Empty, CodigoAviao, Modelo, Passageiros, DataRegistro);
         }
     }
 }

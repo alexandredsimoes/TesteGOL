@@ -2,7 +2,11 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using MiniApps.Imovel.Infra.Data.EventSourcing;
+using TesteGOL.Application.Cadastros.Interfaces;
+using TesteGOL.Application.Cadastros.Services;
 using TesteGOL.Domain.Core.Bus;
+using TesteGOL.Domain.Core.Events;
 using TesteGOL.Domain.Core.Notifications;
 using TesteGOL.Infrastructing.Data.Context;
 using TesteGOL.Shared.Bus;
@@ -26,7 +30,7 @@ namespace TesteGOL.Shared.AspNetCore.Bootstrapper
             // Application
             //services.AddSingleton(Mapper.Configuration);
             services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
-            //services.AddScoped<IEstadoAppService, EstadoAppService>();
+            services.AddScoped<IAirplaneAppService, AirplaneAppService>();
 
             // Domain - Events
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
@@ -45,10 +49,10 @@ namespace TesteGOL.Shared.AspNetCore.Bootstrapper
             services.AddScoped<GolContext>()
                 .AddUnitOfWork<GolContext>();
 
-            // Infra - Data EventSourcing
+            //Infra - Data EventSourcing
             //services.AddScoped<IEventStoreRepository, EventStoreSQLRepository>();
-            //services.AddScoped<IEventStore, SqlEventStore>();
-            //services.AddScoped<EventStoreSQLContext>();
+            services.AddScoped<IEventStore, SqlEventStore>();
+            services.AddScoped<EventStoreSQLContext>();
 
             // Infra - Identity Services
             //services.AddTransient<IEmailSender, AuthEmailMessageSender>();

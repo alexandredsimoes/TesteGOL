@@ -1,0 +1,33 @@
+<h1>Airplanes</h1>
+
+
+<p *ngIf="!airplanes"><em>Loading...</em></p>
+
+<table class='table' *ngIf="airplanes">
+  <thead>
+    <tr>
+      <th>Código avião</th>
+      <th>Modelo</th>
+      <th>Passageiros</th>
+      <th>Data do registro</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let airplane of airplanes">
+      <td>{{ airplane.codigoAviao }}</td>
+      <td>{{ airplane.modelo }}</td>
+      <td>{{ airplane.passageiros }}</td>
+      <td>{{ airplane.dataRegistro }}</td>
+      <td>
+        <button class="btn btn-danger" (click)="removeAirplane(airplane)"> Remover</button>
+        <button class="btn btn-danger" (click)="editAirplane(airplane)" style="margin-left: 20px;"> Alterar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>
+  <a [routerLink]='["/add-airplane"]'>
+    <span>+</span> Criar
+  </a>
+</p>

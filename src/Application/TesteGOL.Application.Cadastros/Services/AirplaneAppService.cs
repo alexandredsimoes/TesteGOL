@@ -52,6 +52,7 @@ namespace TesteGOL.Application.Cadastros.Services
             return await _repository.GetPagedListAsync(orderBy: f => f.OrderByDescending(d => d.DataRegistro),
                 selector: s => new AirplaneViewModel()
                 {
+                    Id = s.Id,
                     CodigoAviao = s.CodigoAviao,
                     DataRegistro = s.DataRegistro,
                     Modelo = s.Modelo,
@@ -61,7 +62,8 @@ namespace TesteGOL.Application.Cadastros.Services
 
         public void Remover(Guid Id)
         {
-            _repository.Delete(id: Id);
+            _repository.Delete(new Airplane(Id, null, null, 0, DateTime.MinValue));
+            _unityOfWork.SaveChanges();
         }
 
         public async Task<AirplaneViewModel> SelecionarAsync(Guid Id)
@@ -70,8 +72,9 @@ namespace TesteGOL.Application.Cadastros.Services
                 disableTracking: true,
                 selector: s => new AirplaneViewModel()
                 {
+                    Id = s.Id,
                     CodigoAviao = s.CodigoAviao,
-                    DataRegistro = s.DataRegistro,
+                    DataRegistro = s.DataRegistro.Date,
                     Modelo = s.Modelo,
                     Passageiros = s.Passageiros
                 });

@@ -12,8 +12,13 @@ namespace TesteGOL.Domain.Cadastros.Entidades
         public int Passageiros { get; private set; }
         public DateTime DataRegistro { get; private set; }
 
-        public Airplane(string codigoAviao, string modelo, int passageiros, DateTime dataRegistro)
+        protected Airplane()
         {
+        }
+
+        public Airplane(Guid id, string codigoAviao, string modelo, int passageiros, DateTime dataRegistro)
+        {
+            Id = id;
             CodigoAviao = codigoAviao;
             Modelo = modelo;
             Passageiros = passageiros;

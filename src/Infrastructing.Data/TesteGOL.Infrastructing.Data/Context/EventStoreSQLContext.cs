@@ -20,26 +20,14 @@ namespace TesteGOL.Infrastructing.Data.Context
         }       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            IConfiguration config = ConfigurationServices.GetConfiguration();
+        {            
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-            string client = config["Database:Client"]?.ToLowerInvariant();
-
-            if (client == "firebird")
-            {
-                optionsBuilder.UseFirebird(config.GetConnectionString("DefaultConnectionFirebird").Replace("{PATH}", ConfigurationServices.GetCurrentDirectory()))
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnectionSql"))
                     .EnableSensitiveDataLogging(true);
-            }
-            else if (client == "mysql")
-            {
-                optionsBuilder.UseMySql(config.GetConnectionString("DefaultConnectionMySql").Replace("{PATH}", ConfigurationServices.GetCurrentDirectory()))
-                    .EnableSensitiveDataLogging(true);
-            }
-            else if (client == null || client == "sqlserver")
-            {
-                optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnectionSql"))
-                    .EnableSensitiveDataLogging(true);
-            }
         }
     }
 }

@@ -15,7 +15,7 @@ namespace MiniApps.Imovel.Application.Cadastro.Mapping
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<AirplaneViewModel, Airplane>()
-                .ConstructUsing(c => new Airplane(c.CodigoAviao, c.Modelo, c.Passageiros, c.DataRegistro))
+                .ConstructUsing(c => new Airplane(c.Id.Value, c.CodigoAviao, c.Modelo, c.Passageiros, c.DataRegistro))
                 .ReverseMap();
         }
     }
